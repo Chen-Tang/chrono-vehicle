@@ -174,6 +174,7 @@ protected:
   double                     m_stepsize;   ///< integration step-size for the vehicle system
 
   friend class ChIrrGuiDriver;
+  friend class ChIrrGuiDriver_SDL;
 };
 
 
