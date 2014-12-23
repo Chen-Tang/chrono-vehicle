@@ -43,6 +43,7 @@ ELSE()
 ENDIF()
 
 OPTION(ENABLE_IRRKLANG "Use Irrklang library for sound" OFF)
+OPTION(ENABLE_SDL2 "Use SDL for input" OFF)
 
 
 

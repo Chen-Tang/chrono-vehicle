@@ -11,7 +11,7 @@ An input manager based on SDL, as opposed to OIS. Will handle keyboard, mouse, a
 #undef main
 #include <map>
 
-#define INPUT_DEADZONE  0.25
+#define INPUT_DEADZONE  0.1
 
 
 
