@@ -67,7 +67,7 @@ public:
     int                 HUD_y = 20
     );
 
-  ~ChIrrGuiDriver_SDL() {}
+  ~ChIrrGuiDriver_SDL();
 
   virtual bool OnEvent(const irr::SEvent& event);
 

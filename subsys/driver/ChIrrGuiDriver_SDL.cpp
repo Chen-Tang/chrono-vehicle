@@ -98,6 +98,9 @@ ChIrrGuiDriver_SDL::ChIrrGuiDriver_SDL(ChIrrApp&           app,
 #endif
 }
 
+ChIrrGuiDriver_SDL::~ChIrrGuiDriver_SDL() {
+	delete m_pInputManager;
+}
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------

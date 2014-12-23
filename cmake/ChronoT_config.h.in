@@ -10,3 +10,5 @@
 
 // Specify if IrrKlang support is enabled
 #define IRRKLANG_ENABLED @IRRKLANG_ENABLED@
+
+#define SDL2_ENABLED @SDL2_ENABLED@

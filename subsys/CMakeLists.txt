@@ -92,6 +92,10 @@ SET(CV_DRIVELINE_FILES
 SET(CV_DRIVER_FILES
     driver/ChDataDriver.h
     driver/ChDataDriver.cpp
+	driver/ChIrrGuiDriver_SDL.h
+	driver/ChIrrGuiDriver_SDL.cpp
+	driver/SDLInputManager.h
+	driver/SDLInputManager.cpp
 )
 
 SET(CV_POVERTRAIN_FILES
@@ -195,6 +199,8 @@ SET_TARGET_PROPERTIES(ChronoVehicle PROPERTIES
 TARGET_LINK_LIBRARIES(ChronoVehicle 
     ${CHRONOENGINE_LIBRARIES}
     ${CH_IRRKLANGLIB}
+	${CH_SDL2LIB}
+	${CH_SDL2mainLIB}
 )
 
 INSTALL(TARGETS ChronoVehicle

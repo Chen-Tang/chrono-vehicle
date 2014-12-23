@@ -207,6 +207,21 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
                 "${CMAKE_BINARY_DIR}/bin/$<CONFIGURATION>"
         )
     ENDIF()
+	
+	IF(ENABLE_SDL2)
+        IF("${CH_COMPILER}" STREQUAL "COMPILER_MSVC")
+            SET(CH_SDL2_DLL "${CH_SDL2_SDKDIR}/lib/x86/SDL2.dll")
+        ELSEIF("${CH_COMPILER}" STREQUAL "COMPILER_MSVC_X64")
+            SET(CH_SDL2_DLL "${CH_SDL2_SDKDIR}/lib/x64/SDL2.dll")
+        ENDIF()
+
+        ADD_CUSTOM_COMMAND(
+            TARGET COPY_DLLS POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CH_SDL2_DLL}"
+                "${CMAKE_BINARY_DIR}/bin/$<CONFIGURATION>"
+        )
+    ENDIF()
 
 ENDIF()
 
@@ -239,6 +254,12 @@ IF(ENABLE_IRRKLANG)
   SET(IRRKLANG_ENABLED "1")
 ELSE()
   SET(IRRKLANG_ENABLED "0")
+ENDIF()
+
+IF(ENABLE_SDL2)
+  SET(SDL2_ENABLED "1")
+ELSE()
+  SET(SDL2_ENABLED "0")
 ENDIF()
 
 SET(CHRONO_DATA_DIR "${CH_CHRONO_SDKDIR}/demos/data/")
