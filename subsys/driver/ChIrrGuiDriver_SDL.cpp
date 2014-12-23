@@ -192,6 +192,28 @@ void ChIrrGuiDriver_SDL::Advance(double step)
 		SetSteering(m_pInputManager->getWheelState().wheel.value);
 		SetThrottle(m_pInputManager->getWheelState().accelerator.value);
 		SetBraking(m_pInputManager->getWheelState().brake.value);
+
+		if (m_pInputManager->getWheelState().red1.down) {
+			m_camera.SetState(ChChaseCamera::Chase);
+		}
+		else if (m_pInputManager->getWheelState().red2.down) {
+			m_camera.SetState(ChChaseCamera::Follow);
+		}
+		else if (m_pInputManager->getWheelState().red3.down) {
+			m_camera.SetState(ChChaseCamera::Track);
+		}
+		else if (m_pInputManager->getWheelState().red4.down) {
+			m_camera.SetState(ChChaseCamera::Inside);
+		}
+
+		if (m_pInputManager->getWheelState().clutch.value > 0.7) {
+			if (m_pInputManager->getWheelState().reverse.down) {
+				m_powertrain.SetDriveMode(ChPowertrain::REVERSE);
+			}
+			else {
+				m_powertrain.SetDriveMode(ChPowertrain::FORWARD);
+			}
+		}
 	}
 	else {
 		if (m_pInputManager->getKeyState(SDLK_a).down) {
