@@ -107,6 +107,41 @@ ELSE()
 ENDIF()
 
 # ------------------------------------------------------------------------------
+# Find SDL2 library
+# ------------------------------------------------------------------------------
+IF(ENABLE_SDL2)
+
+  IF(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+      SET(CH_SDL2_SDKDIR ""  CACHE PATH   "Where is your SDL2 SDK installed?")
+	  SET(CH_SDL2LIB   "" CACHE FILEPATH "Where is your SDL2 library?")
+	  SET(CH_SDL2mainLIB	"" CACHE FILEPATH "Where is your SDL2main library?") 
+  ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+      FIND_PATH(CH_SDL2_SDKDIR NAMES sdl.h PATHS "/usr/include/sdl2" "/usr/local/include/sdl2")
+      FIND_LIBRARY(CH_SDL2LIB NAMES SDL2 PATHS "/usr/local/lib" ${CH_SDL2_SDKDIR}/lib/Linux)
+      FIND_LIBRARY(CH_SDL2mainLIB NAMES SDL2main PATHS "/usr/local/lib" ${CH_SDL2_SDKDIR}/lib/Linux)
+  ENDIF()
+
+  IF(EXISTS "${CH_SDL2_SDKDIR}/include")
+      SET(CH_SDL2INC "${CH_SDL2_SDKDIR}/include")
+  ELSE()
+      SET(CH_SDL2INC "${CH_SDL2_SDKDIR}")
+  ENDIF()
+
+  INCLUDE_DIRECTORIES(${CH_SDL2INC})
+
+  MARK_AS_ADVANCED(CLEAR CH_SDL2_SDKDIR)
+  MARK_AS_ADVANCED(CLEAR CH_SDL2LIB)
+  MARK_AS_ADVANCED(CLEAR CH_SDL2mainLIB)
+
+ELSE()
+
+  MARK_AS_ADVANCED(FORCE CH_SDL2_SDKDIR)
+  MARK_AS_ADVANCED(FORCE CH_SDL2LIB)
+  MARK_AS_ADVANCED(FORCE CH_SDL2mainLIB)
+
+ENDIF()
+
+# ------------------------------------------------------------------------------
 # Add paths to the top of the source directory and the binary directory
 # ------------------------------------------------------------------------------
 
